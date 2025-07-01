@@ -10,12 +10,18 @@ const PORT = process.env.PORT || 5000;
 
 // Security middleware
 app.use(helmet());
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://wep-scrapping-assistance.vercel.app', 'https://wepscrapping-assistance.onrender.com'] 
-    : ['http://localhost:3000'],
-  credentials: true
-}));
+//cors
+app.use(cors());
+app.all('*', function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
+  if (req.method == 'OPTIONS') {
+    res.status(200).end();
+  } else {
+    next();
+  }
+});
 
 // Rate limiting
 const limiter = rateLimit({

@@ -28,9 +28,10 @@ function App() {
     setError(null);
     setResult(null);
 
-    // https://wepscrapping-assistance.onrender.com/
+    // https://wepscrapping-assistance.onrender.com/ ==> 1st
+    // https://wepscrapping-assistance-1.onrender.com/ === new
     try {
-      const response = await axios.post('https://wepscrapping-assistance.onrender.com/api/scrape', { url: url.trim() });
+      const response = await axios.post('https://wepscrapping-assistance-1.onrender.com/api/scrape', { url: url.trim() });
       setResult(response.data);
     } catch (err) {
       console.error('Scraping error:', err);
