@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 app.use(helmet());
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://yourdomain.com'] 
+    ? ['https://wep-scrapping-assistance.vercel.app', 'https://wepscrapping-assistance.onrender.com'] 
     : ['http://localhost:3000'],
   credentials: true
 }));
@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 const firecrawl = new FirecrawlApp({
   apiKey: process.env.FIRECRAWL_API_KEY || 'your-api-key-here'
 });
-console.log("firecrawl=========",firecrawl)
+// console.log("firecrawl=========",firecrawl)
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -62,7 +62,7 @@ app.post('/api/scrape', async (req, res) => {
       });
     }
 
-    console.log(`Scraping and crawling URL: ${url}`);
+    // console.log(`Scraping and crawling URL: ${url}`);
 
     const crawlResult = await firecrawl.crawlUrl(
       url,
@@ -71,7 +71,7 @@ app.post('/api/scrape', async (req, res) => {
       }
     );
 
-    console.log('crawlResult:', JSON.stringify(crawlResult, null, 2));
+    // console.log('crawlResult:', JSON.stringify(crawlResult, null, 2));
 
     let allContent = '';
     if (Array.isArray(crawlResult.data) && crawlResult.data.length > 0) {
@@ -98,7 +98,7 @@ app.post('/api/scrape', async (req, res) => {
       success: true
     };
 
-    console.log(`Successfully scraped and crawled ${url} - ${responseData.wordCount} words`);
+    // console.log(`Successfully scraped and crawled ${url} - ${responseData.wordCount} words`);
     res.json(responseData);
 
   } catch (error) {
