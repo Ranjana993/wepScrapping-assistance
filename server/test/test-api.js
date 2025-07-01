@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const API_BASE_URL = 'https://wepscrapping-assistance.onrender.com/';
+const API_BASE_URL = 'https://wepscrapping-assistance.onrender.com/api';
 
 async function testAPI() {
   console.log('🧪 Testing Web Scraping Assistant API...\n');
